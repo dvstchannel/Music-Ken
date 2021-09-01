@@ -16,16 +16,16 @@ async def pause(_, message: Message):
         conid = conchat.linked_chat.id
         chid = conid
     except:
-        await message.reply("**Apakah obrolan terhubung?**")
+        await message.reply("**Trò chuyện có được kết nối không?**")
         return
     chat_id = chid
     if (chat_id not in callsmusic.pytgcalls.active_calls) or (
         callsmusic.pytgcalls.active_calls[chat_id] == "paused"
     ):
-        await message.reply_text("❗ **Nothing is playing!**")
+        await message.reply_text("❗ **Không có gì đang chơi!**")
     else:
         callsmusic.pytgcalls.pause_stream(chat_id)
-        await message.reply_text("▶️ **Paused!**")
+        await message.reply_text("▶️ **Bị tạm dừng!**")
 
 
 @Client.on_message(
@@ -37,16 +37,16 @@ async def resume(_, message: Message):
         conid = conchat.linked_chat.id
         chid = conid
     except:
-        await message.reply("**Apakah obrolan terhubung?**")
+        await message.reply("**Cuộc trò chuyện có được kết nối không?**")
         return
     chat_id = chid
     if (chat_id not in callsmusic.pytgcalls.active_calls) or (
         callsmusic.pytgcalls.active_calls[chat_id] == "playing"
     ):
-        await message.reply_text("❗ **Tidak ada Lagu yang sedang diputar!**")
+        await message.reply_text("❗ **Không có bài hát!**")
     else:
         callsmusic.pytgcalls.resume_stream(chat_id)
-        await message.reply_text("⏸ **Resumed!**")
+        await message.reply_text("⏸ **Tiếp tục!**")
 
 
 @Client.on_message(
@@ -58,11 +58,11 @@ async def stop(_, message: Message):
         conid = conchat.linked_chat.id
         chid = conid
     except:
-        await message.reply("**Apakah obrolan terhubung?**")
+        await message.reply("**Trò chuyện có được kết nối không?**")
         return
     chat_id = chid
     if chat_id not in callsmusic.pytgcalls.active_calls:
-        await message.reply_text("❗ **Tidak ada Lagu yang sedang diputar!**")
+        await message.reply_text("❗ **Không có bài hát!**")
     else:
         try:
             callsmusic.queues.clear(chat_id)
@@ -70,7 +70,7 @@ async def stop(_, message: Message):
             pass
 
         callsmusic.pytgcalls.leave_group_call(chat_id)
-        await message.reply_text("❌ **Memberhentikan Lagu!**")
+        await message.reply_text("❌ **Dừng bài hát!**")
 
 
 @Client.on_message(
@@ -83,11 +83,11 @@ async def skip(_, message: Message):
         conid = conchat.linked_chat.id
         chid = conid
     except:
-        await message.reply("**Apakah obrolan terhubung?**")
+        await message.reply("**Cuộc trò chuyện có được kết nối không?**")
         return
     chat_id = chid
     if chat_id not in callsmusic.pytgcalls.active_calls:
-        await message.reply_text("❗ **Tidak ada Lagu Selanjutnya untuk dilewati!**")
+        await message.reply_text("❗ **Không có bài hát tiếp theo nào để bỏ qua!**")
     else:
         callsmusic.queues.task_done(chat_id)
 
@@ -98,7 +98,7 @@ async def skip(_, message: Message):
                 chat_id, callsmusic.queues.get(chat_id)["file"]
             )
 
-        await message.reply_text("⏩ **Melewati lagu saat ini!**")
+        await message.reply_text("⏩ **Bỏ qua bài hát hiện tại!**")
 
 
 @Client.on_message(filters.command("channeladmincache"))
@@ -108,7 +108,7 @@ async def admincache(client, message: Message):
         conid = conchat.linked_chat.id
         chid = conid
     except:
-        await message.reply("**Apakah obrolan terhubung?**")
+        await message.reply("**Trò chuyện có được kết nối không?**")
         return
     set(
         chid,
@@ -117,4 +117,4 @@ async def admincache(client, message: Message):
             for member in await conchat.linked_chat.get_members(filter="administrators")
         ],
     )
-    await message.reply_text("✅️ **Daftar admin** telah **diperbarui**")
+    await message.reply_text("✅️ **Danh sách quản trị viên** đã **được làm mới**")
