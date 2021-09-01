@@ -24,38 +24,29 @@ async def start_(client: Client, message: Message):
         "CAACAgUAAxkBAAFF-KFg-jaEvlhu_kNknYQjxsuyDvp--AACjAMAAtpWSVeocCICILIfRSAE"
     )
     await message.reply_text(
-        f"""👋🏻 Hallo, Nama saya [{PROJECT_NAME}](https://telegra.ph/file/ed136c19e7f6afddb4912.jpg)
+        f"""👋🏻 Xin chao tên tôi [{PROJECT_NAME}](https://telegra.ph/file/ed136c19e7f6afddb4912.jpg)
 Dikekolah oleh {OWNER}
 ・✦▭▭▭▭✧◦✦◦✧▭▭▭▭✦ ・
-☑️ Saya memiliki banyak fitur untuk anda yang suka lagu
-🔘 Memutar lagu di group 
-🔘 Memutar lagu di channel
-🔘 Mendownload lagu
-🔘 Mencari link youtube
+☑️ Tôi có nhiều tính năng dành cho những bạn thích bài hát
+🔘 Phát các bài hát trong nhóm
+🔘 Đang phát các bài hát trên kênh
+🔘 Tải xuống các bài hát
+🔘 Tìm kiếm liên kết youtube
 ・✦▭▭▭▭✧◦✦◦✧▭▭▭▭✦ ・
-☑️ Klik tombol bantuan untuk informasi lebih lanjut
+☑️ Nhấp vào nút trợ giúp để biết thêm thông tin
 """,
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("⚔️ ʙᴀɴᴛᴜᴀɴ", callback_data=f"help+1"),
+                    InlineKeyboardButton("⚔️ Xem tiếp", callback_data=f"help+1"),
                     InlineKeyboardButton(
-                        "ᴛᴀᴍʙᴀʜᴋᴀɴ ➕",
+                        "Dùng chua bot ngay ➕",
                         url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
                     ),
                 ],
                 [
                     InlineKeyboardButton(
-                        "👥 ɢʀᴏᴜᴘ", url=f"https://t.me/{SUPPORT_GROUP}"
-                    ),
-                    InlineKeyboardButton(
-                        "ᴄʜᴀɴɴᴇʟ 📣", url=f"https://t.me/{UPDATES_CHANNEL}"
-                    ),
-                ],
-                [
-                    InlineKeyboardButton("🌟 ɢɪᴛ ʜᴜʙ 🌟", url=f"{SOURCE_CODE}"),
-                    InlineKeyboardButton(
-                        "💵 ꜱᴀᴡᴇʀɴʏᴀ", url="https://trakteer.id/kenkansaja/tip"
+                        "💵 Hướng dẫn sử dụng", url="https://www.owohub.cf"
                     ),
                 ],
             ]
@@ -71,19 +62,11 @@ async def gstart(_, message: Message):
         caption=f"""**🔴 {PROJECT_NAME} is online**""",
         reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton(text="🔵 ᴏᴡɴᴇʀ", url=f"t.me/{OWNER}")],
+                [InlineKeyboardButton(text="🔵 TÁC GIẢ", url=f"t.me/{OWNER}")],
                 [
+                    InlineKeyboardButton("🌟 TRỢ LÝ 🌟", url=f"{SOURCE_CODE}"),
                     InlineKeyboardButton(
-                        text="👥 ɢʀᴏᴜᴘ", url=f"https://t.me/{SUPPORT_GROUP}"
-                    ),
-                    InlineKeyboardButton(
-                        text="ᴄʜᴀɴɴᴇʟ 📣", url=f"https://t.me/{UPDATES_CHANNEL}"
-                    ),
-                ],
-                [
-                    InlineKeyboardButton("🌟 ɢɪᴛ ʜᴜʙ 🌟", url=f"{SOURCE_CODE}"),
-                    InlineKeyboardButton(
-                        "💵 ꜱᴀᴡᴇʀɴʏᴀ", url="https://trakteer.id/kenkansaja/tip"
+                        "💵 XEM HƯỚNG DẪN", url="https://"
                     ),
                 ],
             ]
@@ -136,22 +119,22 @@ def map(pos):
             [
                 InlineKeyboardButton(text="⚔️ ʙᴀɴᴛᴜᴀɴ", callback_data=f"help+1"),
                 InlineKeyboardButton(
-                    text="ᴛᴀᴍʙᴀʜᴋᴀɴ ➕",
+                    text="DÙNG CHÙA NGAY ➕",
                     url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
                 ),
             ],
             [
                 InlineKeyboardButton(
-                    text="👥 ɢʀᴏᴜᴘ", url=f"https://t.me/{SUPPORT_GROUP}"
+                    text="👥 TÁC GIẢ", url=f"https://t.me/{OWNER}"
                 ),
                 InlineKeyboardButton(
-                    text="ᴄʜᴀɴɴᴇʟ 📣", url=f"https://t.me/{UPDATES_CHANNEL}"
+                    text="🌟 TRỢ LÝ 🌟", url=f"https://t.me/{SOURCE_CODE}"
                 ),
             ],
             [
-                InlineKeyboardButton("🌟 ɢɪᴛ ʜᴜʙ 🌟", url=f"{SOURCE_CODE}"),
+                InlineKeyboardButton("🌟 TRỢ LÝ 🌟", url=f"{SOURCE_CODE}"),
                 InlineKeyboardButton(
-                    "💵 ꜱᴀᴡᴇʀɴʏᴀ", url="https://trakteer.id/kenkansaja/tip"
+                    "💵 DONATE ĐI", url="https://tra"
                 ),
             ],
         ]
@@ -159,10 +142,10 @@ def map(pos):
         button = [
             [
                 InlineKeyboardButton(
-                    text="⬅️ sᴇʙᴇʟᴜᴍɴʏᴀ", callback_data=f"help+{pos-1}"
+                    text="⬅️ Quay lại", callback_data=f"help+{pos-1}"
                 ),
                 InlineKeyboardButton(
-                    text="sᴇʟᴀɴᴊᴜᴛɴʏᴀ ➡️", callback_data=f"help+{pos+1}"
+                    text="Xem tiếp ➡️", callback_data=f"help+{pos+1}"
                 ),
             ],
         ]
@@ -174,22 +157,14 @@ def map(pos):
 async def admincache(client, message: Message):
     await message.reply_photo(
         photo=f"{KENKAN}",
-        caption="✅ **Bot berhasil dimulai ulang!**\n\n **Daftar admin telah diperbarui**",
+        caption="✅ **Bot đã khởi động lại thành công!**\n\n **Danh sách quản trị viên đã được cập nhật**",
         reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton(text="🔵 ᴏᴡɴᴇʀ", url=f"t.me/{OWNER}")],
+                [InlineKeyboardButton(text="🔵 TÁC GIẢ", url=f"t.me/{OWNER}")],
                 [
+                    InlineKeyboardButton("🌟 TRỢ LÝ 🌟", url=f"{SOURCE_CODE}"),
                     InlineKeyboardButton(
-                        text="👥 ɢʀᴏᴜᴘ", url=f"https://t.me/{SUPPORT_GROUP}"
-                    ),
-                    InlineKeyboardButton(
-                        text="ᴄʜᴀɴɴᴇʟ 📣", url=f"https://t.me/{UPDATES_CHANNEL}"
-                    ),
-                ],
-                [
-                    InlineKeyboardButton("🌟 ɢɪᴛ ʜᴜʙ 🌟", url=f"{SOURCE_CODE}"),
-                    InlineKeyboardButton(
-                        "💵 ꜱᴀᴡᴇʀɴʏᴀ", url="https://trakteer.id/kenkansaja/tip"
+                        "💵 ĐỌC HDSD TRƯỚC KHI DÙNG", url="https://t"
                     ),
                 ],
             ]
@@ -201,57 +176,17 @@ async def admincache(client, message: Message):
 async def ghelp(_, message: Message):
     await message.reply_text(
         """
-**🔰 Perintah**
-      
-**=>> Memutar Lagu 🎧**
-      
-• /play (nama lagu) - Untuk Memutar lagu yang Anda minta melalui youtube
-• /ytplay (nama lagu) - Untuk Memutar lagu yang Anda minta melalui youtube
-• /yt (nama lagu) - Untuk Memutar lagu yang Anda minta melalui youtube
-• /p (nama lagu) - Untuk Memutar lagu yang Anda minta melalui youtube
-• /lplay - Untuk Memutar lagu yang Anda reply dari gc
-• /player: Buka menu Pengaturan pemain
-• /skip: Melewati trek saat ini
-• /pause: Jeda trek
-• /resume: Melanjutkan trek yang dijeda
-• /end: ​​Menghentikan pemutaran media
-• /current: Menampilkan trek yang sedang diputar
-• /playlist: Menampilkan daftar putar
-      
-Semua Perintah Bisa Digunakan Kecuali Perintah /player /skip /pause /resume  /end Hanya Untuk Admin Grup
-      
-**==>>Download Lagu 📥**
-      
-• /song [nama lagu]: Unduh audio lagu dari youtube
-
-**=>> Saluran Music Play 🛠**
-      
-⚪️ Hanya untuk admin grup tertaut:
-      
-• /cplay (nama lagu) - putar lagu yang Anda minta
-• /cplaylist - Tampilkan daftar yang sedang diputar
-• /cccurrent - Tampilkan sedang diputar
-• /cplayer - buka panel pengaturan pemutar musik
-• /cpause - jeda pemutaran lagu
-• /cresume - melanjutkan pemutaran lagu
-• /cskip - putar lagu berikutnya
-• /cend - hentikan pemutaran musik
-• /userbotjoinchannel - undang asisten ke obrolan Anda""",
+**🔰 DÙNG CHÙA THÌ TỰ MÒ LỆNH ĐI CHA 🔰**
+""",
         reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton(text="🔵 ᴏᴡɴᴇʀ", url=f"t.me/{OWNER}")],
+                [InlineKeyboardButton(text="🔵 Tác giả", url=f"t.me/{OWNER}")],
                 [
                     InlineKeyboardButton(
-                        text="👥 ɢʀᴏᴜᴘ", url=f"https://t.me/{SUPPORT_GROUP}"
+                        text="👥 Trợ lý", url=f"https://t.me/{SUPPORT_GROUP}"
                     ),
                     InlineKeyboardButton(
-                        text="ᴄʜᴀɴɴᴇʟ 📣", url=f"https://t.me/{UPDATES_CHANNEL}"
-                    ),
-                ],
-                [
-                    InlineKeyboardButton("🌟 ɢɪᴛ ʜᴜʙ 🌟", url=f"{SOURCE_CODE}"),
-                    InlineKeyboardButton(
-                        "💵 ꜱᴀᴡᴇʀɴʏᴀ", url="https://trakteer.id/kenkansaja/tip"
+                        text="HDSD 📣", url=f"{SOURCE_CODE}"
                     ),
                 ],
             ]
