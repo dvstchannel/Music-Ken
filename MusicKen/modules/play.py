@@ -156,9 +156,9 @@ def updated_stats(chat, queue, vol=150):
         if len(que) > 0:
             stats += "\n\n"
             stats += "Volume : {}%\n".format(vol)
-            stats += "Lagu dalam antrian : `{}`\n".format(len(que))
-            stats += "Sedang memutar lagu : **{}**\n".format(queue[0][0])
-            stats += "Requested by : {}".format(queue[0][1].mention)
+            stats += "Bài hát trong hàng đợi: `{}`\n".format(len(que))
+            stats += "Hiện đang phát một bài hát: **{}**\n".format(queue[0][0])
+            stats += "Được yêu cầu bởi: {}".format(queue[0][1].mention)
     else:
         stats = None
     return stats
@@ -221,7 +221,7 @@ async def p_cb(b, cb):
                 name = song[0]
                 usr = song[1].mention(style="md")
                 msg += f"\n• {name}"
-                msg += f"\n• Req by {usr}\n"
+                msg += f"\n• Yêu cầu bởi {usr}\n"
         await cb.message.edit(
             msg,
             reply_markup=InlineKeyboardMarkup(
@@ -258,11 +258,11 @@ async def m_cb(b, cb):
         if (chet_id not in callsmusic.pytgcalls.active_calls) or (
             callsmusic.pytgcalls.active_calls[chet_id] == "paused"
         ):
-            await cb.answer("Chat is not connected!", show_alert=True)
+            await cb.answer("Trò chuyện không được kết nối!", show_alert=True)
         else:
             callsmusic.pytgcalls.pause_stream(chet_id)
 
-            await cb.answer("Music Paused!")
+            await cb.answer("Nhạc đã tạm dừng!")
             await cb.message.edit(
                 updated_stats(m_chat, qeue), reply_markup=r_ply("play")
             )
@@ -271,10 +271,10 @@ async def m_cb(b, cb):
         if (chet_id not in callsmusic.pytgcalls.active_calls) or (
             callsmusic.pytgcalls.active_calls[chet_id] == "playing"
         ):
-            await cb.answer("Chat is not connected!", show_alert=True)
+            await cb.answer("Trò chuyện không được kết nối!", show_alert=True)
         else:
             callsmusic.pytgcalls.resume_stream(chet_id)
-            await cb.answer("Music Resumed!")
+            await cb.answer("Âm nhạc tiếp tục!")
             await cb.message.edit(
                 updated_stats(m_chat, qeue), reply_markup=r_ply("pause")
             )
@@ -282,59 +282,59 @@ async def m_cb(b, cb):
     elif type_ == "playlist":
         queue = que.get(cb.message.chat.id)
         if not queue:
-            await cb.message.edit("Player is idle")
+            await cb.message.edit("Người chơi không hoạt động")
         temp = []
         for t in queue:
             temp.append(t)
         now_playing = temp[0][0]
         by = temp[0][1].mention(style="md")
-        msg = "**Now Playing** in {}".format(cb.message.chat.title)
+        msg = "**Đang chơi** in {}".format(cb.message.chat.title)
         msg += "\n- " + now_playing
-        msg += "\n- Req by " + by
+        msg += "\n- Yêu cầu bởi " + by
         temp.pop(0)
         if temp:
             msg += "\n\n"
-            msg += "**Queue**"
+            msg += "**Xếp hàng**"
             for song in temp:
                 name = song[0]
                 usr = song[1].mention(style="md")
                 msg += f"\n- {name}"
-                msg += f"\n- Req by {usr}\n"
+                msg += f"\n- Yêu cầu bởi {usr}\n"
         await cb.message.edit(msg)
 
     elif type_ == "resume":
         if (chet_id not in callsmusic.pytgcalls.active_calls) or (
             callsmusic.pytgcalls.active_calls[chet_id] == "playing"
         ):
-            await cb.answer("Chat is not connected or already playng", show_alert=True)
+            await cb.answer("Trò chuyện chưa được kết nối hoặc đã chơi", show_alert=True)
         else:
             callsmusic.pytgcalls.resume_stream(chet_id)
-            await cb.answer("Music Resumed!")
+            await cb.answer("Âm nhạc tiếp tục!")
     elif type_ == "puse":
         if (chet_id not in callsmusic.pytgcalls.active_calls) or (
             callsmusic.pytgcalls.active_calls[chet_id] == "paused"
         ):
-            await cb.answer("Chat is not connected or already paused", show_alert=True)
+            await cb.answer("Trò chuyện chưa được kết nối hoặc đã bị tạm dừng", show_alert=True)
         else:
             callsmusic.pytgcalls.pause_stream(chet_id)
 
-            await cb.answer("Music Paused!")
+            await cb.answer("Nhạc đã tạm dừng!")
     elif type_ == "cls":
-        await cb.answer("Closed menu")
+        await cb.answer("Menu đã đóng")
         await cb.message.delete()
 
     elif type_ == "skip":
         if qeue:
             qeue.pop(0)
         if chet_id not in callsmusic.pytgcalls.active_calls:
-            await cb.answer("Chat is not connected!", show_alert=True)
+            await cb.answer("Trò chuyện không được kết nối!", show_alert=True)
         else:
             callsmusic.queues.task_done(chet_id)
 
             if callsmusic.queues.is_empty(chet_id):
                 callsmusic.pytgcalls.leave_group_call(chet_id)
 
-                await cb.message.edit("- No More Playlist..\n- Leaving VC!")
+                await cb.message.edit("- Không có thêm danh sách phát..\n- Leaving VC!")
             else:
                 callsmusic.pytgcalls.change_stream(
                     chet_id, callsmusic.queues.get(chet_id)["file"]
@@ -342,7 +342,7 @@ async def m_cb(b, cb):
                 await cb.answer("Skipped")
                 await cb.message.edit((m_chat, qeue), reply_markup=r_ply(the_data))
                 await cb.message.reply_text(
-                    f"- Skipped track\n- Now Playing **{qeue[0][0]}**"
+                    f"- Bài hát bị bỏ qua\n- Đang chơi**{qeue[0][0]}**"
                 )
 
     else:
@@ -362,7 +362,7 @@ async def m_cb(b, cb):
 @errors
 async def play(_, message: Message):
     global que
-    lel = await message.reply("🔄 **Sedang Memproses Lagu**")
+    lel = await message.reply("🔄 **Đang xử lý bài hát**")
     administrators = await get_administrators(message.chat)
     chid = message.chat.id
 
@@ -380,20 +380,20 @@ async def play(_, message: Message):
             if administrator == message.from_user.id:
                 if message.chat.title.startswith("Channel Music: "):
                     await lel.edit(
-                        "<b>Ingatlah untuk menambahkan Assistant bot ke Channel Anda</b>",
+                        "<b>Nhớ thêm bot Trợ lý vào Kênh của bạn</b>",
                     )
                 try:
                     invitelink = await _.export_chat_invite_link(chid)
                 except:
                     await lel.edit(
-                        "<b>Tambahkan saya sebagai admin grup Anda terlebih dahulu</b>",
+                        "<b>Trước tiên hãy thêm tôi làm quản trị viên nhóm của bạn</b>",
                     )
                     return
 
                 try:
                     await USER.join_chat(invitelink)
                     await lel.edit(
-                        "<b>Assistant Bot berhasil bergabung dengan Group anda</b>",
+                        "<b>Trợ lý Bot đã tham gia thành công vào nhóm của bạn</b>",
                     )
 
                 except UserAlreadyParticipant:
@@ -401,21 +401,21 @@ async def play(_, message: Message):
                 except Exception:
                     # print(e)
                     await lel.edit(
-                        f"<b>⛑ Flood Wait Error ⛑\n{user.first_name} tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
-                        "\n\nAtau tambahkan Assistant Bot secara manual ke Grup Anda dan coba lagi</b>",
+                        f"<b>⛑ Flood Wait Error ⛑\n{user.first_name} không thể tham gia nhóm của bạn do có nhiều yêu cầu tham gia cho userbot! Đảm bảo rằng người dùng không bị cấm trong nhóm."
+                        "\n\nHoặc thêm Trợ lý Bot theo cách thủ công vào Nhóm của bạn và thử lại</b>",
                     )
     try:
         await USER.get_chat(chid)
         # lmoa = await client.get_chat_member(chid,wew)
     except:
         await lel.edit(
-            f"<i> {user.first_name} terkena banned dari Grup ini, Minta admin untuk unbanned assistant bot lalu tambahkan Assistant Bot secara manual.</i>"
+            f"<i> {user.first_name} đã bị cấm khỏi nhóm này, hãy yêu cầu quản trị viên bỏ cấm bot trợ lý sau đó thêm Bot trợ lý theo cách thủ công.</i>"
         )
         return
     message.from_user.id
     message.from_user.first_name
     text_links = None
-    await lel.edit("🔎 **Sedang Mencari Lagu**")
+    await lel.edit("🔎 **Tìm kiếm bài hát**")
     message.from_user.id
     if message.reply_to_message:
         entities = []
@@ -442,7 +442,7 @@ async def play(_, message: Message):
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             raise DurationLimitError(
-                f"❌ **Video dengan durasi lebih dari** `{DURATION_LIMIT}` **menit tidak boleh diputar!**"
+                f"❌ **Video có thời lượng hơn** `{DURATION_LIMIT}` **phút không thể chơi!**"
             )
         keyboard = InlineKeyboardMarkup(
             [
@@ -494,19 +494,13 @@ async def play(_, message: Message):
             [
                 [
                     InlineKeyboardButton("📖 ᴘʟᴀʏʟɪꜱᴛ", callback_data="playlist"),
-                    InlineKeyboardButton(
-                        "💬 ɢʀᴏᴜᴘ", url=f"https://t.me/{SUPPORT_GROUP}"
-                    ),
                 ],
                 [
                     InlineKeyboardButton(
-                        "💌 ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{updateschannel}"
-                    ),
-                    InlineKeyboardButton(
-                        "💵 ꜱᴀᴡᴇʀɴʏᴀ", url="https://trakteer.id/kenkansaja/tip"
+                        "💵 XEM HDSD", url="https://"
                     ),
                 ],
-                [InlineKeyboardButton(text="🗑 ᴛᴜᴛᴜᴘ", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 ĐÓNG", callback_data="cls")],
             ]
         )
         requested_by = message.from_user.first_name
@@ -517,7 +511,7 @@ async def play(_, message: Message):
         for i in message.command[1:]:
             query += " " + str(i)
         print(query)
-        await lel.edit("🎵 **Sedang Memproses Lagu**")
+        await lel.edit("🎵 **Đang xử lý bài hát**")
         ydl_opts = {"format": "141/bestaudio[ext=m4a]"}
         try:
             results = YoutubeSearch(query, max_results=1).to_dict()
@@ -534,7 +528,7 @@ async def play(_, message: Message):
 
         except Exception as e:
             await lel.edit(
-                "**Lagu tidak ditemukan.** Coba cari dengan judul lagu yang lebih jelas, Ketik `/help` bila butuh bantuan"
+                "**Bài hát không được tìm thấy.** Hãy thử tìm kiếm với tên bài hát rõ ràng hơn!"
             )
             print(str(e))
             return
@@ -544,19 +538,13 @@ async def play(_, message: Message):
             [
                 [
                     InlineKeyboardButton("📖 ᴘʟᴀʏʟɪꜱᴛ", callback_data="playlist"),
-                    InlineKeyboardButton(
-                        "💬 ɢʀᴏᴜᴘ", url=f"https://t.me/{SUPPORT_GROUP}"
-                    ),
                 ],
                 [
                     InlineKeyboardButton(
-                        "💌 ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{updateschannel}"
-                    ),
-                    InlineKeyboardButton(
-                        "💵 ꜱᴀᴡᴇʀɴʏᴀ", url="https://trakteer.id/kenkansaja/tip"
+                        "💵 XEM HDSD", url="https://"
                     ),
                 ],
-                [InlineKeyboardButton(text="🗑 ᴛᴜᴛᴜᴘ", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 ĐÓNG callback_data="cls")],
             ]
         )
         requested_by = message.from_user.first_name
@@ -573,7 +561,7 @@ async def play(_, message: Message):
         qeue.append(appendable)
         await message.reply_photo(
             photo="final.png",
-            caption=f"🏷 **Judul :** [{title[:60]}]({url})\n**⏱ Durasi :** {duration}\n"
+            caption=f"[{title[:60]}]({url})\n**⏱ Thời lượng :** {duration}\n"
             + f"🔇 **Antri :** {position}!\n🎧 **Permintaan :** {requested_by}",
             reply_markup=keyboard,
         )
@@ -591,13 +579,13 @@ async def play(_, message: Message):
         try:
             callsmusic.pytgcalls.join_group_call(chat_id, file_path)
         except:
-            message.reply("Voice Chat Group tidak aktif, Saya tidak dapat bergabung")
+            message.reply("Nhóm trò chuyện thoại không hoạt động, tôi không thể tham gia")
             return
         await message.reply_photo(
             photo="final.png",
             reply_markup=keyboard,
-            caption=f"🏷 **Judul:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n🔊 **Status:** Sedang Memutar\n"
-            + f"🎧 **Request Dari:** {message.from_user.mention}",
+            caption=f"🏷 **Tiêu đề:** [{title[:60]}]({url})\n⏱ **Durasi:** {duration}\n🔊 **Tình trạng:** Đang phát\n"
+            + f"🎧 **Yêu cầu nhạc:** {message.from_user.mention}",
         )
         return await lel.delete()
         os.remove("final.png")
@@ -607,7 +595,7 @@ async def play(_, message: Message):
 @errors
 async def stream(_, message: Message):
 
-    lel = await message.reply("🔁 **processing** sound...")
+    lel = await message.reply("🔁 **Chế biến** cục cứt chiên bơ...")
     message.from_user.id
     message.from_user.first_name
 
@@ -630,7 +618,7 @@ async def stream(_, message: Message):
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             raise DurationLimitError(
-                f"❌ Videos longer than {DURATION_LIMIT} minute(s) aren't allowed to play!"
+                f"❌ Vượt quá {DURATION_LIMIT} phút không được phép chơi!"
             )
 
         file_name = get_file_name(audio)
@@ -642,13 +630,13 @@ async def stream(_, message: Message):
     elif url:
         file_path = await convert(youtube.download(url))
     else:
-        return await lel.edit_text("❗ Tolong beri saya song yang akan di play!")
+        return await lel.edit_text("❗ Làm ơn cho tôi một bài hát để chơi!")
 
     if message.chat.id in callsmusic.pytgcalls.active_calls:
         position = await queues.put(message.chat.id, file=file_path)
         await message.reply_photo(
             photo=f"{KENKAN}",
-            caption=f"🔊 **Lagu yang Anda minta Sedang Antri di posisi** `{position}`",
+            caption=f"🔊 **Bài hát bạn yêu cầu đang Xếp hàng vào vị trí** `{position}`",
             reply_markup=keyboard,
         )
         return await lel.delete()
@@ -657,7 +645,7 @@ async def stream(_, message: Message):
         await message.reply_photo(
             photo=f"{KENKAN}",
             reply_markup=keyboard,
-            caption="🎧 **Memutar Lagu Permintaan :** {}!".format(
+            caption="🎧 **Đang phát bài hát yêu cầu:** {}!".format(
                 message.from_user.mention()
             ),
         )
