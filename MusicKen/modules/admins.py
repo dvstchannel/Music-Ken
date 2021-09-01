@@ -22,7 +22,7 @@ async def update_admin(client, message: Message):
             for member in await message.chat.get_members(filter="administrators")
         ],
     )
-    await message.reply_text("✅️ Admin cache refreshed!")
+    await message.reply_text("✅️ Bộ nhớ cache của quản trị viên đã được làm mới!")
 
 
 @Client.on_message(command(["pause", f"pause@{BOT_USERNAME}"]) & other_filters)
@@ -32,10 +32,10 @@ async def pause(_, message: Message):
     if (chat_id not in callsmusic.pytgcalls.active_calls) or (
         callsmusic.pytgcalls.active_calls[chat_id] == "paused"
     ):
-        await message.reply_text("❗ **Tidak ada Lagu yang sedang diputar!**")
+        await message.reply_text("❗ **Không có bài hát đang phát!**")
     else:
         callsmusic.pytgcalls.pause_stream(chat_id)
-        await message.reply_text("▶️ **Paused!**")
+        await message.reply_text("▶️ **Bị tạm dừng!**")
 
 
 @Client.on_message(command(["resume", f"resume@{BOT_USERNAME}"]) & other_filters)
@@ -45,10 +45,10 @@ async def resume(_, message: Message):
     if (chat_id not in callsmusic.pytgcalls.active_calls) or (
         callsmusic.pytgcalls.active_calls[chat_id] == "playing"
     ):
-        await message.reply_text("❗ **Tidak ada Lagu yang sedang dijeda!**")
+        await message.reply_text("❗ **Không có bài hát nào hiện đang bị tạm dừng!**")
     else:
         callsmusic.pytgcalls.resume_stream(chat_id)
-        await message.reply_text("⏸ **Resumed!**")
+        await message.reply_text("⏸ **Tiếp tục!**")
 
 
 @Client.on_message(command(["end", f"end@{BOT_USERNAME}"]) & other_filters)
@@ -56,7 +56,7 @@ async def resume(_, message: Message):
 async def stop(_, message: Message):
     chat_id = get_chat_id(message.chat)
     if chat_id not in callsmusic.pytgcalls.active_calls:
-        await message.reply_text("❗ **Tidak ada Lagu yang sedang diputar!**")
+        await message.reply_text("❗ **Không có bài hát đang phát!**")
     else:
         try:
             callsmusic.queues.clear(chat_id)
