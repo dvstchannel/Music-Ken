@@ -34,7 +34,7 @@ async def addchannel(client, message):
         invitelink = await client.export_chat_invite_link(chid)
     except:
         await message.reply_text(
-            "<b>Tambahkan saya sebagai admin grup Anda terlebih dahulu</b>",
+            "<b>Trước tiên hãy thêm tôi làm quản trị viên nhóm của bạn</b>",
         )
         return
 
@@ -47,17 +47,17 @@ async def addchannel(client, message):
         await USER.join_chat(invitelink)
     except UserAlreadyParticipant:
         await message.reply_text(
-            f"<b>{user.first_name} sudah ada di obrolan Anda</b>",
+            f"<b>{user.first_name} đã có trong cuộc trò chuyện của bạn</b>",
         )
     except Exception as e:
         print(e)
         await message.reply_text(
-            f"<b>⛑ Flood Wait Error ⛑\n{user.first_name} tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
-            "\n\nAtau tambahkan Assistant bot secara manual ke Grup Anda dan coba lagi.</b>",
+            f"<b>⛑ Flood Wait Error ⛑\n{user.first_name} không thể tham gia nhóm của bạn do có nhiều yêu cầu tham gia cho userbot! Đảm bảo rằng người dùng không bị cấm trong nhóm."
+            "\n\nHoặc thêm bot Trợ lý theo cách thủ công vào Nhóm của bạn và thử lại.</b>",
         )
         return
     await message.reply_text(
-        f"<b>{user.first_name} berhasil bergabung dengan obrolan Anda</b>",
+        f"<b>{user.first_name} đã tham gia thành công cuộc trò chuyện của bạn</b>",
     )
 
 
@@ -68,8 +68,8 @@ async def rem(USER, message):
         await USER.leave_chat(message.chat.id)
     except:
         await message.reply_text(
-            "<b>Pengguna tidak dapat meninggalkan grup Anda! Mungkin menunggu floodwaits."
-            "\n\nAtau keluarkan saya secara manual dari ke Grup Anda</b>",
+            "<b>Người dùng không thể rời khỏi nhóm của bạn! Có lẽ là chờ đợi lũ lụt."
+            "\n\nHoặc xóa tôi khỏi Nhóm của bạn theo cách thủ công</b>",
         )
         return
 
@@ -79,22 +79,22 @@ async def bye(client, message):
     if message.from_user.id in SUDO_USERS:
         left = 0
         failed = 0
-        lol = await message.reply("**Asisten Meninggalkan semua obrolan**")
+        lol = await message.reply("**Trợ lý Để lại tất cả các cuộc trò chuyện**")
         async for dialog in USER.iter_dialogs():
             try:
                 await USER.leave_chat(dialog.chat.id)
                 left = left + 1
                 await lol.edit(
-                    f"Asisten pergi... Berhasil: {left} obrolan. Gagal: {failed} obrolan."
+                    f"Trợ lý còn lại ... Đã thành công:{left} trò chuyện. Thất bại: {failed} trò chuyện."
                 )
             except:
                 failed = failed + 1
                 await lol.edit(
-                    f"Asisten pergi... Berhasil: {left} obrolan. Gagal: {failed} obrolan."
+                    f"Trợ lý còn lại ... Đã thành công: {left} trò chuyện. Thất bại: {failed} trò chuyện."
                 )
             await asyncio.sleep(0.7)
         await client.send_message(
-            message.chat.id, f"Berhasil {left} obrolan. Gagal {failed} obrolan."
+            message.chat.id, f"Thành công {left} trò chuyện. Thất bại {failed} trò chuyện."
         )
 
 
@@ -109,13 +109,13 @@ async def addcchannel(client, message):
         conid = conchat.linked_chat.id
         chid = conid
     except:
-        await message.reply("Apakah obrolan terhubung?")
+        await message.reply("Trò chuyện có được kết nối không?")
         return
     try:
         invitelink = await client.export_chat_invite_link(chid)
     except:
         await message.reply_text(
-            "<b>Tambahkan saya sebagai admin saluran Anda terlebih dahulu</b>",
+            "<b>Trước tiên hãy thêm tôi làm quản trị viên kênh của bạn</b>",
         )
         return
 
@@ -128,16 +128,16 @@ async def addcchannel(client, message):
         await USER.join_chat(invitelink)
     except UserAlreadyParticipant:
         await message.reply_text(
-            f"<b>{user.first_name} sudah ada di channel anda</b>",
+            f"<b>{user.first_name} đã có trên kênh của bạn</b>",
         )
         return
     except Exception as e:
         print(e)
         await message.reply_text(
-            f"<b>⛑ Flood Wait Error ⛑\n{user.first_name} tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
-            "\n\nAtau tambahkan Assistant bot secara manual ke Grup Anda dan coba lagi.</b>",
+            f"<b>⛑ Flood Wait Error ⛑\n{user.first_name} không thể tham gia nhóm của bạn do có nhiều yêu cầu tham gia cho userbot! Đảm bảo rằng người dùng không bị cấm trong nhóm."
+            "\n\nHoặc thêm bot Trợ lý theo cách thủ công vào Nhóm của bạn và thử lại.</b>",
         )
         return
     await message.reply_text(
-        f"<b>{user.first_name} sudah bergabung dengan obrolan Anda</b>",
+        f"<b>{user.first_name} đã tham gia cuộc trò chuyện của bạn</b>",
     )
