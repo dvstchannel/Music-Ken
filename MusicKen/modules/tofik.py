@@ -21,10 +21,10 @@ async def asupan(client, message):
         resp = requests.get("https://tede-api.herokuapp.com/api/asupan/ptl").json()
         results = f"{resp['url']}"
         return await client.send_video(
-            message.chat.id, video=results, caption=f"Nih asupan {rpk} biar gak ngantuk"
+            message.chat.id, video=results, caption=f"Đây là lượng {rpk} đừng ngủ"
         )
     except Exception:
-        await message.reply_text("Ada yang salah LOL...")
+        await message.reply_text("Có gì đó không ổn LOL...")
 
 
 @Client.on_message(command(["wibu", f"wibu@{bu}"]))
@@ -40,10 +40,10 @@ async def wibu(client, message):
         resp = requests.get("https://tede-api.herokuapp.com/api/asupan/wibu").json()
         results = f"{resp['url']}"
         return await client.send_video(
-            message.chat.id, video=results, caption=f"Paste bau si {rpk} wibu ternyata"
+            message.chat.id, video=results, caption=f"Dán bau si {rpk} WIBU NEVER DIEEEEEE"
         )
     except Exception:
-        await message.reply_text("Ada yang salah LOL...")
+        await message.reply_text("Có gì đó không ổn LOL...")
 
 
 @Client.on_message(command(["chika", f"chika@{bu}"]))
@@ -59,10 +59,10 @@ async def chika(client, message):
         resp = requests.get("https://tede-api.herokuapp.com/api/chika").json()
         results = f"{resp['url']}"
         return await client.send_video(
-            message.chat.id, video=results, caption=f"Chika cantik ya {rpk}"
+            message.chat.id, video=results, caption=f"Chika xinh đẹp {rpk}"
         )
     except Exception:
-        await message.reply_text("Ada yang salah LOL...")
+        await message.reply_text("Có gì đó không ổn LOL...")
 
 
 @Client.on_message(command(["truth", f"truth@{bu}"]))
@@ -72,7 +72,7 @@ async def truth(client, message):
         results = f"{resp['message']}"
         return await message.reply_text(results)
     except Exception:
-        await message.reply_text("Ada yang salah LOL...")
+        await message.reply_text("Có gì đó không ổn LOL...")
 
 
 @Client.on_message(command(["dare", f"dare@{bu}"]))
@@ -82,17 +82,17 @@ async def dare(client, message):
         results = f"{resp['message']}"
         return await message.reply_text(results)
     except Exception:
-        await message.reply_text("Ada yang salah LOL...")
+        await message.reply_text("Có gì đó không ổn LOL...")
 
 
 @Client.on_message(command(["lyrics", f"lyrics@{bu}"]))
 async def lirik(_, message):
     try:
         if len(message.command) < 2:
-            await message.reply_text("**Nyari apa?**")
+            await message.reply_text("**Đang tìm gì?**")
             return
         query = message.text.split(None, 1)[1]
-        rep = await message.reply_text("🔎 **Sedang Mencari lyrics**")
+        rep = await message.reply_text("🔎 **Tìm kiếm lời bài hát**")
         resp = requests.get(
             f"https://tede-api.herokuapp.com/api/lirik?l={query}"
         ).json()
@@ -100,5 +100,5 @@ async def lirik(_, message):
         await rep.edit(result)
     except Exception:
         await rep.edit(
-            "**Lyrics tidak ditemukan.** Coba cari dengan judul lagu yang lebih jelas"
+            "**Lời bài hát không tìm thấy.** Hãy thử tìm kiếm với tên bài hát rõ ràng hơn"
         )
