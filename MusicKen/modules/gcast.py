@@ -14,9 +14,9 @@ async def gcast(_, message: Message):
     failed = 0
     if message.from_user.id not in SUDO_USERS:
         return
-    wtf = await message.reply("Sedang mengirim pesan global...")
+    wtf = await message.reply("Gửi tin nhắn toàn cầu...")
     if not message.reply_to_message:
-        await wtf.edit("Balas pesan teks apa pun untuk gcast")
+        await wtf.edit("Trả lời bất kỳ tin nhắn văn bản nào cho gcast")
         return
     lmao = message.reply_to_message.text
     async for dialog in USER.iter_dialogs():
@@ -24,16 +24,16 @@ async def gcast(_, message: Message):
             await USER.send_message(dialog.chat.id, lmao)
             sent = sent + 1
             await wtf.edit(
-                f"`Sedang mengirim pesan global` \n\n**Terkirim ke:** `{sent}` chat \n**Gagal terkirim ke:** {failed} chat"
+                f"`Gửi tin nhắn toàn cầu` \n\n**Gửi đến:** `{sent}` chat \n**Không gửi được tới: ** {failed} chat"
             )
             await asyncio.sleep(0.7)
         except:
             failed = failed + 1
             await wtf.edit(
-                f"`Sedang mengirim pesan global` \n\n**Terkirim ke:** `{sent}` Chats \n**Gagal terkirim ke:** {failed} Chats"
+                f"`Gửi tin nhắn toàn cầu` \n\n**Gửi đến:** `{sent}` Chats \n**Không gửi được tới:** {failed} Chats"
             )
             await asyncio.sleep(0.7)
 
     return await wtf.edit(
-        f"`Pesan global selesai` \n\n**Terkirim ke:** `{sent}` Chats \n**Gagal terkirim ke:** {failed} Chats"
+        f"`Thông báo toàn cầu đã hoàn tất` \n\n**Gửi đến:** `{sent}` Chats \n**Không gửi được tới** {failed} Chats"
     )
