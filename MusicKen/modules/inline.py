@@ -16,7 +16,7 @@ async def inline(client: Client, query: InlineQuery):
         await client.answer_inline_query(
             query.id,
             results=answers,
-            switch_pm_text="Ketikkan Nama Lagu/video di YouTube...",
+            switch_pm_text="Nhập tên bài hát / video trên YouTube ...",
             switch_pm_parameter="help",
             cache_time=0,
         )
@@ -43,6 +43,6 @@ async def inline(client: Client, query: InlineQuery):
             await query.answer(
                 results=answers,
                 cache_time=0,
-                switch_pm_text="Error: Search timed out",
+                switch_pm_text="Lỗi: Tìm kiếm đã hết thời gian chờ",
                 switch_pm_parameter="",
             )
