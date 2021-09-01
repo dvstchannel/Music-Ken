@@ -5,88 +5,88 @@ class Messages:
     HELP_MSG = [
         ".",
         f"""
-**👋🏻 Hai Selamat Datang Kembali Di [{PROJECT_NAME}](https://telegra.ph/file/ed136c19e7f6afddb4912.jpg)
+**👋🏻 Xin chào, Chào mừng trở lại [{PROJECT_NAME}](https://telegra.ph/file/ed136c19e7f6afddb4912.jpg)
 
-⚪️ {PROJECT_NAME} Dapat Memutar Musik Di Obrolan Suara Grup Anda Serta Obrolan Suara Saluran
+⚪️ {PROJECT_NAME} có thể phát nhạc trong nhóm của bạn Trò chuyện thoại cũng như Trò chuyện thoại trên kênh
 
-⚪️ Assistant Name >> @{ASSISTANT_NAME}\n\n☑️ Klik Selanjutnya Untuk Informasi Lebih Lanjut**
+⚪️ Assistant Name >> @{ASSISTANT_NAME}\n\n☑️ Nhấp vào Tiếp theo để biết thêm thông tin**
 """,
         f"""
-**🛠️ Pengaturan**
+**🛠️ THỰC HIỆN TỪNG BƯỚC **
 
-1) Jadikan Bot Sebagai Admin
-2) Mulai Obrolan Suara / Vcg
-3) Kirim Perintah /userbotjoin
-• Jika Assistant Bot Bergabung Selamat Menikmati Musik, 
-• Jika Assistant Bot Tidak Bergabung Silahkan Tambahkan @{ASSISTANT_NAME} Ke Grup Anda Dan Coba Lagi
+1) Thêm @{ASSISTANT_NAME} vào nhóm cần phát nhạc.
+2) Set Admin cho Bot với quyền quản lý cuộc gọi thoại.
+3) Mở voice chat lên và nhập lệnh /userbotjoin
+• Nếu Assistant Bot tham gia vào nhóm bắt đầu oder âm nhạc,
+• Nếu Trợ lý Bot không tham gia, vui lòng thêm @{ASSISTANT_NAME}
 
-**Untuk Saluran Music Play 📣**
+**Đối với kênh chơi nhạc 📣**
 
-1) Jadikan Bot Sebagai Admin Saluran
-2) Kirim /userbotjoinchannel Di Grup Tertaut
-3) Sekarang Kirim Perintah Di Grup Tertaut
+1) Đặt Bot làm quản trị viên kênh
+2) Gửi /userbotjoinchannel trong nhóm được liên kết
+3) Bây giờ gửi lệnh trong các nhóm được liên kết
 """,
         """
-**🔰 Perintah**
+**🔰 CÁCH ODER NHẠC**
 
-**=>> Memutar Lagu 🎧**
+**=>> Đang phát bài hát 🎧**
 
-• /play (nama lagu) - Untuk Memutar lagu yang Anda minta melalui youtube
-• /ytplay (nama lagu) - Untuk Memutar lagu yang Anda minta melalui youtube
-• /yt (nama lagu) - Untuk Memutar lagu yang Anda minta melalui youtube
-• /p (nama lagu) - Untuk Memutar lagu yang Anda minta melalui youtube
-• /lplay - Reply song yang ada di gc nanti akan otomatis di putar di vcg
-• /player: Buka menu Pengaturan pemain
-• /skip: Melewati trek saat ini
-• /pause: Jeda trek
-• /resume: Melanjutkan trek yang dijeda
-• /end: ​​Menghentikan pemutaran media
-• /current: Menampilkan trek yang sedang diputar
-• /playlist: Menampilkan daftar putar
+• /play (tên bài hát) - Để phát bài hát bạn yêu cầu qua youtube
+• /ytplay (tên bài hát) - như trên
+• /yt (tên bài hát) - như trên
+• /p (tên bài hát) - như trên
+• /lplay - Trả lời tệp âm thanh trên nhóm sẽ được tự động phát trên VCG
+• /player: Chuyển đến menu Cài đặt trình phát
+• /skip: Bỏ qua bản nhạc hiện tại
+• /pause:  Tạm dừng
+• /resume: Tiếp tục một bản nhạc đã tạm dừng
+• /end: ​​ Dừng phát lại phương tiện
+• /current: Hiển thị bản nhạc hiện đang phát
+• /playlist: Hiển thị danh sách phát
 
-Semua Perintah Bisa Digunakan Kecuali Perintah /player /skip /pause /resume  /end Hanya Untuk Admin Grup
+Tất cả các lệnh đều có thể được sử dụng ngoại trừ các lệnh /player /skip /pause /resume /end tất cả các lệnh đều có thể được sử dụng ngoại trừ các lệnh
 
-**==>>Download Lagu 📥**
+**==>>Tải bài hát 📥**
 
-• /song [nama lagu]: Unduh audio lagu dari youtube
+• /song [tên bài hát]: Tải xuống âm thanh bài hát từ youtube
 """,
         f"""
-**=>> Saluran Music Play 🛠**
+**=>> Kênh chơi nhạc 🛠**
 
-⚪️ Hanya untuk admin grup tertaut:
+⚪️ Chỉ dành cho quản trị viên nhóm được liên kết:
 
-• /cplay (nama lagu) - putar lagu yang Anda minta
-• /cplaylist - Tampilkan daftar yang sedang diputar
-• /cccurrent - Tampilkan sedang diputar
-• /cplayer - buka panel pengaturan pemutar musik
-• /cpause - jeda pemutaran lagu
-• /cresume - melanjutkan pemutaran lagu
-• /cskip - putar lagu berikutnya
-• /cend - hentikan pemutaran musik
-• /userbotjoinchannel - undang asisten ke obrolan Anda
+• /cplay (nama lagu) - phát bài hát bạn yêu cầu
+• /cplaylist - Hiển thị danh sách hiện đang chơi
+• /cccurrent - Chương trình đang phát
+• /cplayer - mở bảng cài đặt trình phát nhạc
+• /cpause - tạm dừng phát lại bài hát
+• /cresume - tiếp tục chơi bài hát
+• /cskip - Phát bài hát tiếp theo
+• /cend - dừng chơi nhạc
+• /userbotjoinchannel - mời trợ lý vào cuộc trò chuyện của bạn
 
-⚪️ Jika Anda Tidak Suka Bermain Di Grup Tertaut:
+⚪️ Nếu bạn không thích chơi trong các nhóm được liên kết:
 
-1) Dapatkan ID Saluran Anda.
-2) Buat Grup Dengan Judul: Channel Music: ID_SALURAN_ANDA
-3) Tambahkan Bot Sebagai Admin Saluran Dengan Izin Penuh
-4) Tambahkan @{ASSISTANT_NAME} Ke Saluran Sebagai admin.
-5) Cukup Kirim Perintah Di Grup Anda
+1) Nhận ID kênh của bạn.
+2) Tạo nhóm với tiêu đề: Channel Music: #ID_KÊNH
+3) Thêm Bot làm quản trị viên kênh với đầy đủ quyền
+4) Thêm @{ASSISTANT_NAME} vào kênh với tư cách quản trị viên.
+5) Chỉ cần gửi đơn hàng trong nhóm của bạn
 
-**=>> Lebih Banyak Alat 🧑‍🔧**
+**=>> Thêm công cụ 🧑‍🔧**
 
-- /admincache: Memperbarui Info Admin Grup Anda. Coba Jika Bot Tidak Mengenali Admin
-- /userbotjoin: Undang @{ASSISTANT_NAME} Userbot Ke Grup Anda
+- /admincache: Cập nhật thông tin quản trị nhóm của bạn. Hãy thử nếu Bot không nhận ra quản trị viên
+- /userbotjoin: Mời gọi @{ASSISTANT_NAME} trợ lý cho nhóm của bạn
 """,
-        f"""👋🏻 Hallo, Nama saya [{PROJECT_NAME}](https://telegra.ph/file/ed136c19e7f6afddb4912.jpg)
-Dikekolah oleh {OWNER}
+        f"""👋🏻 Xin chào tên tôi là [{PROJECT_NAME}](https://telegra.ph/file/ed136c19e7f6afddb4912.jpg)
+Trường học bởi {OWNER}
 ・✦▭▭▭▭✧◦✦◦✧▭▭▭▭✦ ・
-☑️ Saya memiliki banyak fitur untuk anda yang suka lagu
-🔘 Memutar lagu di group 
-🔘 Memutar lagu di channel
-🔘 Mendownload lagu
-🔘 Mencari link youtube
+☑️ Tôi có nhiều tính năng dành cho những bạn thích bài hát
+🔘 Phát các bài hát trong nhóm
+🔘 Phát các bài hát trên kênh
+🔘 Tải xuống các bài hát
+🔘 Tìm kiếm liên kết youtube
 ・✦▭▭▭▭✧◦✦◦✧▭▭▭▭✦ ・
-☑️ Klik tombol bantuan untuk informasi lebih lanjut
+☑️ Nhấp vào nút trợ giúp để biết thêm thông tin
 """,
     ]
