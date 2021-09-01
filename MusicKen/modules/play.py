@@ -41,7 +41,7 @@ def cb_admin_check(func: Callable) -> Callable:
         if cb.from_user.id in admemes:
             return await func(client, cb)
         else:
-            await cb.answer("Kamu tidak diizinkan!", show_alert=True)
+            await cb.answer("Bạn không được phép!", show_alert=True)
             return
 
     return decorator
@@ -97,9 +97,9 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
     img = Image.open("temp.png")
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("etc/font.otf", 32)
-    draw.text((30, 550), f"Judul : {title}", (255, 215, 0), font=font)
-    draw.text((30, 590), f"Durasi : {duration}", (255, 215, 0), font=font)
-    draw.text((30, 630), f"Penonton : {views}", (255, 215, 0), font=font)
+    draw.text((30, 550), f"{title}", (255, 215, 0), font=font)
+    draw.text((30, 590), f"{duration}", (255, 215, 0), font=font)
+    draw.text((30, 630), f"{views}", (255, 215, 0), font=font)
     draw.text(
         (30, 670),
         f"Permintaan : {requested_by}",
@@ -116,43 +116,31 @@ async def playlist(client, message):
     global que
     queue = que.get(message.chat.id)
     if not queue:
-        await message.reply_text("Player is idle")
+        await message.reply_text("Người chơi không hoạt động")
     temp = []
     for t in queue:
         temp.append(t)
     now_playing = temp[0][0]
     by = temp[0][1].mention(style="md")
-    msg = "**Lagu Yang Sedang dimainkan** di {}".format(message.chat.title)
+    msg = "**Bài hát hiện tại** di {}".format(message.chat.title)
     msg += "\n• " + now_playing
-    msg += "\n• Req by " + by
+    msg += "\n• Yêu cầu bởi " + by
     temp.pop(0)
     if temp:
         msg += "\n\n"
-        msg += "**Antrian Lagu**"
+        msg += "**Hàng đợi bài hát**"
         for song in temp:
             name = song[0]
             usr = song[1].mention(style="md")
             msg += f"\n• {name}"
-            msg += f"\n• Req by {usr}\n"
+            msg += f"\n• Yều cầu bởi {usr}\n"
     await message.reply_text(
         msg,
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("📖 ᴘʟᴀʏʟɪꜱᴛ", callback_data="playlist"),
-                    InlineKeyboardButton(
-                        "💬 ɢʀᴏᴜᴘ", url=f"https://t.me/{SUPPORT_GROUP}"
-                    ),
-                ],
-                [
-                    InlineKeyboardButton(
-                        "💌 ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{updateschannel}"
-                    ),
-                    InlineKeyboardButton(
-                        "💵 ꜱᴀᴡᴇʀɴʏᴀ", url="https://trakteer.id/kenkansaja/tip"
-                    ),
-                ],
-                [InlineKeyboardButton(text="🗑 ᴛᴜᴛᴜᴘ", callback_data="cls")],
+                    InlineKeyboardButton("📖 Danh sách", callback_data="playlist"),
+                    InlineKeyboardButton(text="🗑 Đóng", callback_data="cls")]
             ]
         ),
     )
@@ -183,7 +171,7 @@ async def ee(client, message):
     if stats:
         await message.reply(stats)
     else:
-        await message.reply("**Silahkan Nyalakan dulu VCG nya!**")
+        await message.reply("**Vui lòng mở voice call ở nhóm trước trước!**")
 
 
 @Client.on_message(filters.command("player") & filters.group & ~filters.edited)
@@ -202,7 +190,7 @@ async def settings(client, message):
         else:
             await message.reply(stats, reply_markup=r_ply("play"))
     else:
-        await message.reply("**Silahkan Nyalakan dulu VCG nya!**")
+        await message.reply("**Vui lòng mở voice call ở nhóm trước trước!**")
 
 
 @Client.on_callback_query(filters.regex(pattern=r"^(playlist)$"))
@@ -216,13 +204,13 @@ async def p_cb(b, cb):
     if type_ == "playlist":
         queue = que.get(cb.message.chat.id)
         if not queue:
-            await cb.message.edit("**Sedang tidak Memutar lagu**")
+            await cb.message.edit("**Không phát một bài hát**")
         temp = []
         for t in queue:
             temp.append(t)
         now_playing = temp[0][0]
         by = temp[0][1].mention(style="md")
-        msg = "**Lagu Yang Sedang dimainkan** di {}".format(cb.message.chat.title)
+        msg = "**Bài hát hiện tại** di {}".format(cb.message.chat.title)
         msg += "\n• " + now_playing
         msg += "\n• Req by " + by
         temp.pop(0)
@@ -238,21 +226,10 @@ async def p_cb(b, cb):
             msg,
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [
-                        InlineKeyboardButton("📖 ᴘʟᴀʏʟɪꜱᴛ", callback_data="playlist"),
-                        InlineKeyboardButton(
-                            "💬 ɢʀᴏᴜᴘ", url=f"https://t.me/{SUPPORT_GROUP}"
-                        ),
-                    ],
-                    [
-                        InlineKeyboardButton(
-                            "💌 ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{updateschannel}"
-                        ),
-                        InlineKeyboardButton(
-                            "💵 ꜱᴀᴡᴇʀɴʏᴀ", url="https://trakteer.id/kenkansaja/tip"
-                        ),
-                    ],
-                    [InlineKeyboardButton(text="🗑 ᴛᴜᴛᴜᴘ", callback_data="cls")],
+                 [
+                    InlineKeyboardButton("📖 Danh sách", callback_data="playlist"),
+                    InlineKeyboardButton(text="🗑 Đóng", callback_data="cls")]
+            ]
                 ]
             ),
         )
@@ -470,28 +447,17 @@ async def play(_, message: Message):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("📖 ᴘʟᴀʏʟɪꜱᴛ", callback_data="playlist"),
-                    InlineKeyboardButton(
-                        "💬 ɢʀᴏᴜᴘ", url=f"https://t.me/{SUPPORT_GROUP}"
-                    ),
-                ],
-                [
-                    InlineKeyboardButton(
-                        "💌 ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{updateschannel}"
-                    ),
-                    InlineKeyboardButton(
-                        "💵 ꜱᴀᴡᴇʀɴʏᴀ", url="https://trakteer.id/kenkansaja/tip"
-                    ),
-                ],
-                [InlineKeyboardButton(text="🗑 ᴛᴜᴛᴜᴘ", callback_data="cls")],
+                    InlineKeyboardButton("📖 Danh sách", callback_data="playlist"),
+                    InlineKeyboardButton(text="🗑 Đóng", callback_data="cls")]
+            ]
             ]
         )
         file_name = get_file_name(audio)
         title = file_name
-        thumb_name = "https://telegra.ph/file/bfc7198787440999409bc.jpg"
+        thumb_name = "http://fc04.deviantart.net/fs70/i/2010/205/7/d/owo_wallpaper_by_Thundervalley.jpg"
         thumbnail = thumb_name
         duration = round(audio.duration / 60)
-        views = "Locally added"
+        views = "Đã thêm cục bộ"
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
         file_path = await convert(
@@ -501,7 +467,7 @@ async def play(_, message: Message):
         )
     elif urls:
         query = toxt
-        await lel.edit("🎵 **Sedang Memproses Lagu**")
+        await lel.edit("🎵 **Đang xử lý bài hát**")
         ydl_opts = {"format": "141/bestaudio[ext=m4a]"}
         try:
             results = YoutubeSearch(query, max_results=1).to_dict()
@@ -518,7 +484,7 @@ async def play(_, message: Message):
 
         except Exception as e:
             await lel.edit(
-                "**Lagu tidak ditemukan.** Coba cari dengan judul lagu yang lebih jelas, Ketik `/help` bila butuh bantuan"
+                "**Bài hát không được tìm thấy.** Coba cari dengan judul lagu yang lebih jelas, Ketik `/help` bila butuh bantuan"
             )
             print(str(e))
             return
@@ -647,17 +613,10 @@ async def stream(_, message: Message):
 
     keyboard = InlineKeyboardMarkup(
         [
-            [
-                InlineKeyboardButton("📖 ᴘʟᴀʏʟɪꜱᴛ", callback_data="playlist"),
-                InlineKeyboardButton("💬 ɢʀᴏᴜᴘ", url=f"https://t.me/{SUPPORT_GROUP}"),
-            ],
-            [
-                InlineKeyboardButton("💌 ᴄʜᴀɴɴᴇʟ", url=f"https://t.me/{updateschannel}"),
-                InlineKeyboardButton(
-                    "💵 ꜱᴀᴡᴇʀɴʏᴀ", url="https://trakteer.id/kenkansaja/tip"
-                ),
-            ],
-            [InlineKeyboardButton(text="🗑 ᴛᴜᴛᴜᴘ", callback_data="cls")],
+                [
+                    InlineKeyboardButton("📖 Danh sách", callback_data="playlist"),
+                    InlineKeyboardButton(text="🗑 Đóng", callback_data="cls")]
+            ]
         ]
     )
 
